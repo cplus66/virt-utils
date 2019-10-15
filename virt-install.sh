@@ -9,12 +9,12 @@ virsh destroy  $KVM_VM_NAME
 virsh undefine $KVM_VM_NAME
 set -e
 virt-install \
+    --disk=$1,device=disk,bus=virtio,format=qcow2 \
     --ram 2048 \
     --vcpus 2 \
-    --disk=$1,device=disk,bus=virtio,format=qcow2 \
+    --name $KVM_VM_NAME \
+    --network bridge=br0 \
     --import \
     --vnc \
-    --noautoconsole  \
-    --network bridge=br0 \
-    --name $KVM_VM_NAME 
+    --noautoconsole
 
