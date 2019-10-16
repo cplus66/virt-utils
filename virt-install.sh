@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 # Date: 2017-0516
-# Author: cplus.shen@advantech.com.tw
+# Author: cplus.shen
 # Description: setup M30 chip passthrough mode and launch CentOS 7.2 VM
 
 KVM_VM_NAME=VM

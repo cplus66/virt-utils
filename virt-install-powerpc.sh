@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 # Date: 2017-0516
-# Author: cplus.shen@advantech.com.tw
+# Author: cplus.shen
 # Description: bootup powerpc e500 U-boot
 # usage: virt-install-ppc.sh <disk.img> <u-boot>
 
