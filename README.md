@@ -26,14 +26,11 @@ root@worker-1:/boot/grub# blkid
 
 root@worker-1:/boot/grub# vi grub.cfg
         if [ x$feature_platform_search_hint = xy ]; then
-          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-eff
-i=hd0,gpt1 --hint-baremetal=ahci0,gpt1  cc3a13c5-c36c-4021-af14-6ff186f0b4bd
+          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-effi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  cc3a13c5-c36c-4021-af14-6ff186f0b4bd
         else
-          search --no-floppy --fs-uuid --set=root cc3a13c5-c36c-4021-af14-6ff1866
-f0b4bd  
+          search --no-floppy --fs-uuid --set=root cc3a13c5-c36c-4021-af14-6ff1866f0b4bd  
         fi
-        linux   /boot/vmlinuz-4.15.0-65-generic root=UUID=cc3a13c5-c36c-4021-af11
-4-6ff186f0b4bd ro  console=tty1 console=ttyS0
+        linux   /boot/vmlinuz-4.15.0-65-generic root=UUID=cc3a13c5-c36c-4021-af14-6ff186f0b4bd ro  console=tty1 console=ttyS0
 
 ```
 
