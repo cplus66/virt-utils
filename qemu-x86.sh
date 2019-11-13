@@ -7,11 +7,7 @@ qemu-system-i386 \
   -net bridge -net nic,model=virtio \
   -netdev bridge,id=network0,br=br0 \
   -device e1000,netdev=network0,mac=52:54:00:12:34:57 \
-  -hda cirros-0.3.5-x86_64-disk.img \
+  -hda $IMAGE \
   -kernel bzImage \
   -m 512 \
   -bios u-boot.rom 
-
-#  -msg timestamp=on
-
-#  -hda $IMAGE \
