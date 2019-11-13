@@ -6,9 +6,13 @@ Scripts to launch VM by using virsh
 Scripts to launch VM by using qemu-system-*
 
 ## Customized VM Images
-Reset password
-Remove cloud-init package
-Strink the image to reduce the size
+- change root password to 'root' (OS=ubuntu img-reset-password.sh image password)
+- added Garfield and Orchimaru into hosts
+- added user 'ubuntu'
+- added 'ubuntu' into sudo
+- support authorized_keys upload (OS=ubuntu img-upload-authorized-keys.sh image user_id)
+- change disk size to 8GB (img-resize.sh image 8G)
+- shrik file size
 
 ### Grub Setting
 
