@@ -12,13 +12,14 @@
 # - Run resize2fs /dev/vda1
 
 if [ $# -ne 2 ]; then
-  echo "%0 image size"
+  echo "$0 image size"
   exit 1
 fi
 
 IMAGE=$1
 SIZE=$2
 
-qemu-img resize $IMAGE $SIZE
-
+sudo qemu-img resize $IMAGE $SIZE
+echo "ubuntu: run parted, fdisk and resize2fs"
+echo "centos: run parted and fdisk"
 
