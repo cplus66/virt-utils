@@ -36,15 +36,6 @@ linux   /boot/vmlinuz-4.15.0-65-generic root=UUID=cc3a13c5-c36c-4021-af14-6ff186
 
 ```
 
-### Upload Authorized keys
-```
-sudo virt-customize -a $undercloud_dst --run-command "mkdir -p /root/.ssh/" \
-      --upload /home/stack/.ssh/id_rsa.pub:/root/.ssh/authorized_keys \
-      --run-command "chmod 600 /root/.ssh/authorized_keys && restorecon /root/.ssh/authorized_keys" \
-      --run-command "cp /root/.ssh/authorized_keys /home/stack/.ssh/" \
-      --run-command "chown stack:stack /home/stack/.ssh/authorized_keys && chmod 600 /home/stack/.ssh/authorized_keys"
-```
-
 ## useful Commands
 
 List inactive VM
