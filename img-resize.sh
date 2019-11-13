@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash
 # Date: Nov 12, 2019
 # Author: cplus.shen
 # Description: virtual disk resize

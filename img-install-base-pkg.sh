@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash
 # Date: Nov 04, 2019
 # Author: cplus.shen
 # Description: Install debian based package on VM image
