@@ -14,6 +14,8 @@ Scripts to launch VM by using qemu-system-*
 - change disk size to 8GB (img-resize.sh image 8G)
 - shrik file size
 
+- install JDK
+
 ### Grub Setting
 
 /etc/default/grub
