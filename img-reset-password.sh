@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -e
 # Date: Nov 01, 2019
 # Author: cplus.shen
 # Description: reset root password

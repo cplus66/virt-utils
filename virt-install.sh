@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -e
 # Date: 2017-0516
 # Author: cplus.shen
 # Description:
