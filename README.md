@@ -46,11 +46,6 @@ virsh list --inactive
 ```
 
 ## Reference
-- extlinux for Debian OpenStack Image.
-
-http://shallowsky.com/linux/extlinux.html
-
-- virt-rescue for MBR or Image broken.
-
-http://libguestfs.org/virt-rescue.1.html
+- extlinux for Debian OpenStack Image. http://shallowsky.com/linux/extlinux.html
+- virt-rescue for MBR or Image broken. http://libguestfs.org/virt-rescue.1.html
 
