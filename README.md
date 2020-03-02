@@ -13,8 +13,8 @@ Scripts to launch VM by using qemu-system-*
 - support authorized_keys upload (OS=ubuntu img-upload-authorized-keys.sh image user_id)
 - change disk size to 8GB (img-resize.sh image 8G)
 - shrik file size
-
 - install JDK
+- added "net.ifnames=0" to /etc/default/grub and line GRUB_CMDLINE_LINUX and update-grub
 
 ### Grub Setting
 
