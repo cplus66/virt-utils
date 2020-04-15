@@ -22,7 +22,7 @@ IMAGE_NAME=$1
 IP=$2
 
 sed -e "s/IP_ADDR/$IP/g" template/interfaces > interfaces
-sudo virt-customize -a $IMAGE_NAME  --upload $BASEDIR/interfaces:/etc/network/interfaces
-sudo virt-customize -a $IMAGE_NAME  --upload $BASEDIR/template/resolv.conf:/etc/resolv.conf
+sudo virt-customize -a $IMAGE_NAME --upload $BASEDIR/interfaces:/etc/network
+sudo virt-customize -a $IMAGE_NAME --run-command 'sudo apt install -y resolvconf'
 rm -f interfaces
 
