@@ -14,7 +14,7 @@ if [ "x$OS" == "x" ]; then
   OS=ubuntu
 fi
 
-if [ $OS == "ubuntu" ]; then
+if [ $OS == "ubuntu" -o $OS == "debian" ]; then
   sudo virt-customize -v -x --run-command 'sudo apt-get remove -y cloud-init' -a $1
 else
   sudo virt-customize -v -x --run-command 'sudo yum remove -y cloud-init' -a $1
