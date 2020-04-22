@@ -17,9 +17,9 @@ if [ "x$OS" == "x" ]; then
   OS=ubuntu
 fi
 
-BASEDIR=$(dirname "$0")
 IMAGE_NAME=$1
 IP=$2
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 sed -e "s/IP_ADDR/$IP/g" template/interfaces > interfaces
 sudo virt-customize -a $IMAGE_NAME --upload $BASEDIR/interfaces:/etc/network

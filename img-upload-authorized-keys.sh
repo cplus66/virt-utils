@@ -19,8 +19,7 @@ fi
 
 IMAGE_NAME=$1
 USER_ID=$2
-
-BASEDIR=$(dirname "$0")
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 sudo virt-customize -a $IMAGE_NAME  --upload $BASEDIR/public-keys/$USER_ID.pub:/home/$OS/.ssh/authorized_keys
 
