@@ -1,0 +1,62 @@
+#!/usr/bin/expect
+# Date: Apr 22, 2020
+# Author: Cplus Shen
+# Description: disk enlarge size for ubuntu 18.04
+
+set timeout 5
+set fdisk_prompt "Command (m for help):"
+
+### FDISK ###
+spawn /sbin/fdisk /dev/vda
+
+expect $fdisk_prompt
+send "p\r"
+
+# Command (m for help): d   
+expect $fdisk_prompt
+send "d\r"
+
+# Command (m for help): n
+expect $fdisk_prompt
+send "n\r"
+
+# Select (default p):
+expect ":"
+send "p\r"
+
+# Partition number (1-4, default 1):
+expect ":"
+send "1\r"
+
+# First sector (2048-4194303, default 2048):
+expect ":"
+send "\r"
+
+# Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-4194303, default 4194303):
+expect ":"
+send "\r"
+
+# Created a new partition 1 of type 'Linux filesystem' and of size 15.9 GiB.
+# Partition #1 contains a ext4 signature.
+# Do you want to remove the signature? [Y]es/[N]o: Yes
+
+expect {
+  timeout { puts "\n\r" }
+  "Do you want to remove the signature*:" { send "Y\r" }
+}
+
+# The signature will be removed by a write command.
+expect $fdisk_prompt
+send "w\r"
+
+expect "Syncing disks."
+send_user "\n\r"
+
+### RESIZE2FS ###
+spawn /sbin/resize2fs /dev/vda1
+
+# resize2fs 1.44.1 (24-Mar-2018)
+# Filesystem at /dev/vda1 is mounted on /; on-line resizing required
+# old_desc_blocks = 2, new_desc_blocks = 4
+# The filesystem on /dev/vda1 is now 8360187 (4k) blocks long.
+expect " blocks long."
