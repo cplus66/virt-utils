@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 # Date: Apr 22, 2020
 # Author: Cplus Shen
-# Description: disk enlarge size for ubuntu 18.04
+# Description: disk enlarge size for Debian 10
 
 set timeout 5
 set fdisk_prompt "Command (m for help):"
