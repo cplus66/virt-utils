@@ -25,6 +25,6 @@ sudo virt-customize -a $IMAGE_NAME  --upload $BASEDIR/public-keys/$USER_ID.pub:/
 
 if [ $OS == "centos" ]; then
   sudo virt-customize -a $IMAGE_NAME  --run-command "chmod 600 /home/centos/.ssh/authorized_keys && restorecon /home/centos/.ssh/authorized_keys" 
-elif # ubuntu and debian
+else # ubuntu and debian
   sudo virt-customize -a $IMAGE_NAME  --run-command "chmod 600 /home/$OS/.ssh/authorized_keys" 
 fi
