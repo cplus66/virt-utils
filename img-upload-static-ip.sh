@@ -9,7 +9,7 @@
 #        OS: ubuntu | debian
 
 if [ $# -ne 2 ]; then
-  echo "Usgae: OS={centos|ubuntu} $0 <image> <ip>"
+  echo "Usgae: $0 <image> <ip>"
   exit 1
 fi
 
