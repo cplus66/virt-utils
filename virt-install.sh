@@ -60,6 +60,7 @@ elif [ "x$NET2" == "x" ]; then
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
+    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
@@ -73,6 +74,7 @@ else
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
+    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
