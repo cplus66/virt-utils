@@ -19,7 +19,7 @@
 #   8    |  16384 = 64 / 24 * 8 | 512G = 2T / 24 * 8
 
 if [ $# -ne 2 ]; then
-  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={br0|br1} NET2={br0|br1} $0 KVM_NAME IMAGE_NAME"
+  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} $0 KVM_NAME IMAGE_NAME"
   exit 1
 fi
 
@@ -32,7 +32,7 @@ if [ "x$RAM" == "x" ]; then
 fi
 
 if [ "x$OS" == "x" ]; then
-  OS=ubuntu18.04
+  OS=generic
 fi
 
 if [ "x$NET" == "x" ]; then
@@ -42,11 +42,25 @@ fi
 
 KVM_VM_NAME=$1
 
-if [ "x$NET2" == "x" ]; then
+if [ "x$NET" == "xdefault" ]; then
   virt-install \
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
+    --os-variant $OS \
+    --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    --import \
+    --vnc \
+    --noautoconsole  \
+    --network default \
+    --name $KVM_VM_NAME
+
+elif [ "x$NET2" == "x" ]; then
+  virt-install \
+    --arch x86_64 \
+    --vcpus $CPU \
+    --ram $RAM \
+    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
@@ -60,6 +74,7 @@ else
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
+    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
