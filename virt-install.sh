@@ -17,6 +17,11 @@
 #   2    |  4096  = 64 / 24 * 2 | 128G = 2T / 24 * 2
 #   4    |  9128  = 64 / 24 * 4 | 256G = 2T / 24 * 4
 #   8    |  16384 = 64 / 24 * 8 | 512G = 2T / 24 * 8
+#
+# TODO
+# - support UEFI boot
+#   --boot uefi \
+#
 
 if [ $# -ne 2 ]; then
   echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} $0 KVM_NAME IMAGE_NAME"
@@ -52,7 +57,7 @@ if [ "x$NET" == "xdefault" ]; then
     --import \
     --vnc \
     --noautoconsole  \
-    --network default \
+    --network default,model=virtio \
     --name $KVM_VM_NAME
 
 elif [ "x$NET2" == "x" ]; then
@@ -60,13 +65,12 @@ elif [ "x$NET2" == "x" ]; then
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
-    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
     --vnc \
     --noautoconsole  \
-    --network bridge=$NET \
+    --network bridge=$NET,model=virtio \
     --name $KVM_VM_NAME
 
 else
@@ -74,14 +78,13 @@ else
     --arch x86_64 \
     --vcpus $CPU \
     --ram $RAM \
-    --boot uefi \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
     --import \
     --vnc \
     --noautoconsole  \
-    --network bridge=$NET \
-    --network bridge=$NET2 \
+    --network bridge=$NET,model=virtio \
+    --network bridge=$NET2,model=virtio \
     --name $KVM_VM_NAME
 
 fi
