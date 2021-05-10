@@ -15,8 +15,8 @@ for i in $LIST; do
   FILE=$(virsh domblklist $i | sed 1,2d | awk '{print $2}')
   stat $FILE 2>&1 1>& /dev/null
   if [ $? -eq 0 ]; then
-    echo ${NAME},${FILE},OK
+	  echo $(hostname),${NAME},${FILE},OK
   else
-    echo ${NAME},${FILE},NOK
+    echo $(hostname),${NAME},${FILE},NOK
   fi
 done
