@@ -2,8 +2,6 @@
 # Date: 2017-0516
 # Author: cplus.shen
 # Description:
-#   Usage: CPU="" RAM="" NET="" NET2="" virt-install.sh KVM_NAME IMAGE_NAME
-#
 #   - Remove KVM if it exists
 #     virsh destory $KVM_VM_NAME
 #     virsh undefine $KVM_VM_NAME
@@ -18,13 +16,9 @@
 #   4    |  9128  = 64 / 24 * 4 | 256G = 2T / 24 * 4
 #   8    |  16384 = 64 / 24 * 8 | 512G = 2T / 24 * 8
 #
-# TODO
-# - support UEFI boot
-#   --boot uefi \
-#
 
 if [ $# -ne 2 ]; then
-  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} $0 KVM_NAME IMAGE_NAME"
+  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} UEFI={0|1} $0 KVM_NAME IMAGE_NAME"
   exit 1
 fi
 
@@ -44,6 +38,12 @@ if [ "x$NET" == "x" ]; then
   NET=br0
 fi
 
+if [ "x$UEFI" == "x" ]; then
+  UEFI=""
+else
+  UEFI=" --boot uefi "
+fi
+
 
 KVM_VM_NAME=$1
 
@@ -54,6 +54,7 @@ if [ "x$NET" == "xdefault" ]; then
     --ram $RAM \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    $UEFI \
     --import \
     --vnc \
     --noautoconsole  \
@@ -67,6 +68,7 @@ elif [ "x$NET2" == "x" ]; then
     --ram $RAM \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    $UEFI \
     --import \
     --vnc \
     --noautoconsole  \
@@ -80,6 +82,7 @@ else
     --ram $RAM \
     --os-variant $OS \
     --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    $UEFI \
     --import \
     --vnc \
     --noautoconsole  \
