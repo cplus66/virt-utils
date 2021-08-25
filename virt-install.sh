@@ -18,7 +18,8 @@
 #
 
 if [ $# -ne 2 ]; then
-  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} UEFI={0|1} $0 KVM_NAME IMAGE_NAME"
+  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} UEFI={0|1} DISK_BUS={usb,ide,scsi}"
+  echo "$0 KVM_NAME IMAGE_NAME"
   exit 1
 fi
 
@@ -44,6 +45,10 @@ else
   UEFI=" --boot uefi "
 fi
 
+if [ "x$DISK_BUS" == "x" ]; then
+  DISK_BUS="virt_io"
+fi
+
 
 KVM_VM_NAME=$1
 
@@ -53,7 +58,7 @@ if [ "x$NET" == "xdefault" ]; then
     --vcpus $CPU \
     --ram $RAM \
     --os-variant $OS \
-    --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
     $UEFI \
     --import \
     --vnc \
@@ -67,7 +72,7 @@ elif [ "x$NET2" == "x" ]; then
     --vcpus $CPU \
     --ram $RAM \
     --os-variant $OS \
-    --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
     $UEFI \
     --import \
     --vnc \
@@ -81,7 +86,7 @@ else
     --vcpus $CPU \
     --ram $RAM \
     --os-variant $OS \
-    --disk=$2,device=disk,bus=virtio,format=qcow2 \
+    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
     $UEFI \
     --import \
     --vnc \
