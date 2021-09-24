@@ -46,7 +46,7 @@ else
 fi
 
 if [ "x$DISK_BUS" == "x" ]; then
-  DISK_BUS="virt_io"
+  DISK_BUS="virtio"
 fi
 
 
