@@ -29,6 +29,10 @@ elif [ x$OS == "xdebian-10" ]; then
   sudo virt-customize -a $IMAGE --upload $DIR/img-resize-vda-debian.exp:/root
   sudo virt-customize -a $IMAGE --run-command "/root/img-resize-vda-debian.exp; rm /root/img-resize-vda-debian.exp"
 else
-  echo "ubuntu 14/16: run parted, fdisk and resize2fs"
+  echo "ubuntu 14/16: run parted, fdisk ,resize2fs and grub PARTUUID"
+  echo "mount --bind /dev /mnt/dev &&
+	mount --bind /dev/pts /mnt/dev/pts &&
+	mount --bind /proc /mnt/proc &&
+	mount --bind /sys /mnt/sys"
   echo "centos: run parted and fdisk"
 fi
