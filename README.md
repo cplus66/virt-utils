@@ -53,6 +53,6 @@ virsh list --inactive
 # Git Access by using SSH
 ```
 eval "$(ssh-agent -s)"
-ssh-add .ssh/github_rsa
+ssh-add ~/.ssh/github_rsa
 git clone git@github.com:cplus66/virt-utils.git
 ```
