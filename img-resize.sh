@@ -31,8 +31,8 @@ elif [ x$OS == "xdebian-10" ]; then
 else
   echo "ubuntu 14/16: run parted, fdisk ,resize2fs and grub PARTUUID"
   echo "mount --bind /dev /mnt/dev &&
-	mount --bind /dev/pts /mnt/dev/pts &&
-	mount --bind /proc /mnt/proc &&
-	mount --bind /sys /mnt/sys"
+mount --bind /dev/pts /mnt/dev/pts &&
+mount --bind /proc /mnt/proc &&
+mount --bind /sys /mnt/sys"
   echo "centos: run parted and fdisk"
 fi
