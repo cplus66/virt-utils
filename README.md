@@ -63,7 +63,7 @@ ssh-add ~/.ssh/github_rsa
 ```
 
 # VM Network Configuration
-## Yocto
+## Yocto Systemd Networkd
 
 ```
 cat << EOF > 20-wired.network
