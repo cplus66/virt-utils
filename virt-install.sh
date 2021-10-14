@@ -24,11 +24,11 @@ if [ $# -ne 2 ]; then
 fi
 
 if [ "x$CPU" == "x" ]; then
-  CPU=2
+  CPU=4
 fi
 
 if [ "x$RAM" == "x" ]; then
-  RAM=2048
+  RAM=4096
 fi
 
 if [ "x$OS" == "x" ]; then
@@ -36,7 +36,7 @@ if [ "x$OS" == "x" ]; then
 fi
 
 if [ "x$NET" == "x" ]; then
-  NET=br0
+  NET=br1
 fi
 
 if [ "x$UEFI" == "x" ]; then
