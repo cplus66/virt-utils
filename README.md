@@ -61,3 +61,38 @@ or
 ssh-agent bash
 ssh-add ~/.ssh/github_rsa
 ```
+
+# VM Network Configuration
+## Yocto
+
+```
+cat << EOF > 20-wired.network
+# enp0s3.network
+[Match]
+Name=enp0s3
+
+[Network]
+#DHCP=ipv4
+VLAN=vlan1001
+EOF
+cat << EOF > vlan1001.netdev
+[NetDev]
+Name=vlan1001
+Kind=vlan
+
+[VLAN]
+Id=1001
+EOF
+cat << EOF > vlan1001.network
+[Match]
+Name=vlan1001
+
+[Network]
+DHCP=no
+Address=192.168.10.42/24
+Gateway=192.168.10.1
+DNS=8.8.8.8
+
+LinkLocalAddressing=no
+EOF
+```
