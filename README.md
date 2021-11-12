@@ -96,3 +96,16 @@ DNS=8.8.8.8
 LinkLocalAddressing=no
 EOF
 ```
+
+# Create a New VM Host
+- hostnamectl set-hostname $HOSTNAME
+- edit /etc/hosts
+- edit /etc/network/interfaces
+
+# Resize VM Disk Size (Ubuntu 20.04)
+- blkid
+- parted
+- fdisk
+- resize2fs
+- edit /etc/default/grub.d/40-force-partuuid.cfg
+- update-grub
