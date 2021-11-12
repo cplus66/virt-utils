@@ -23,32 +23,17 @@ if [ $# -ne 2 ]; then
   exit 1
 fi
 
-if [ "x$CPU" == "x" ]; then
-  CPU=4
-fi
-
-if [ "x$RAM" == "x" ]; then
-  RAM=4096
-fi
-
-if [ "x$OS" == "x" ]; then
-  OS=generic
-fi
-
-if [ "x$NET" == "x" ]; then
-  NET=br1
-fi
+CPU=${CPU:-4}
+RAM=${RAM:-4096}
+OS=${OS:-generic}
+NET=${NET:-br1}
+DISK_BUS=${DISK_BUS:-virtio}
 
 if [ "x$UEFI" == "x" ]; then
   UEFI=""
 else
   UEFI=" --boot uefi "
 fi
-
-if [ "x$DISK_BUS" == "x" ]; then
-  DISK_BUS="virtio"
-fi
-
 
 KVM_VM_NAME=$1
 
