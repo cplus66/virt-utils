@@ -102,10 +102,16 @@ EOF
 - edit /etc/hosts
 - edit /etc/network/interfaces
 
-# Resize VM Disk Size (Ubuntu 20.04)
+# Resize VM Disk Size 
+## Ubuntu 20.04
 - blkid
 - parted
 - fdisk
 - resize2fs
 - edit /etc/default/grub.d/40-force-partuuid.cfg
 - update-grub
+
+## Ubuntu 18.04
+- parted
+- fdisk
+- resize2fs
