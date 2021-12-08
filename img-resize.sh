@@ -33,6 +33,8 @@ else
   cat << EOF
 ubuntu 14.04 or ubuntu 16.04: run parted, fdisk ,resize2fs and grub PARTUUID
 centos: run parted and fdisk
+centos-8: run fdisk and xfs_growfs
+debian 11.1: none
 
 mount --bind /dev /mnt/dev &&
 mount --bind /dev/pts /mnt/dev/pts &&
