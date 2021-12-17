@@ -36,10 +36,10 @@ centos: run parted and fdisk
 centos-8: run fdisk and xfs_growfs
 debian 11.1: none
 
-mount --bind /dev /mnt/dev &&
-mount --bind /dev/pts /mnt/dev/pts &&
-mount --bind /proc /mnt/proc &&
-mount --bind /sys /mnt/sys"
+mount --bind /dev /mnt/dev 
+mount --bind /dev/pts /mnt/dev/pts 
+mount --bind /proc /mnt/proc 
+mount --bind /sys /mnt/sys
 EOF
 
 fi
