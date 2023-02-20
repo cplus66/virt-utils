@@ -26,7 +26,7 @@ fi
 CPU=${CPU:-4}
 RAM=${RAM:-4096}
 OS=${OS:-generic}
-NET=${NET:-br1}
+NET=${NET:-default}
 DISK_BUS=${DISK_BUS:-virtio}
 
 if [ "x$UEFI" == "x" ]; then
@@ -36,48 +36,28 @@ else
 fi
 
 KVM_VM_NAME=$1
+NET_CONF=
 
 if [ "x$NET" == "xdefault" ]; then
-  virt-install \
-    --arch x86_64 \
-    --vcpus $CPU \
-    --ram $RAM \
-    --os-variant $OS \
-    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
-    $UEFI \
-    --import \
-    --vnc \
-    --noautoconsole  \
-    --network default,model=virtio \
-    --name $KVM_VM_NAME
+  NET_CONF="--network default,model=virtio"
 
 elif [ "x$NET2" == "x" ]; then
-  virt-install \
-    --arch x86_64 \
-    --vcpus $CPU \
-    --ram $RAM \
-    --os-variant $OS \
-    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
-    $UEFI \
-    --import \
-    --vnc \
-    --noautoconsole  \
-    --network bridge=$NET,model=virtio \
-    --name $KVM_VM_NAME
+  NET_CONF="--network bridge=$NET,model=virtio"
 
 else
-  virt-install \
-    --arch x86_64 \
-    --vcpus $CPU \
-    --ram $RAM \
-    --os-variant $OS \
-    --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
-    $UEFI \
-    --import \
-    --vnc \
-    --noautoconsole  \
-    --network bridge=$NET,model=virtio \
-    --network bridge=$NET2,model=virtio \
-    --name $KVM_VM_NAME
-
+  NET_CONF="--network bridge=$NET,model=virtio"
+  NET_CONF="$NET_CONF  --network bridge=$NET2,model=virtio"
 fi
+
+virt-install \
+  --arch x86_64 \
+  --vcpus $CPU \
+  --ram $RAM \
+  --os-variant $OS \
+  --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
+  $UEFI \
+  --import \
+  --vnc \
+  --noautoconsole \
+  $NET_CONF \
+  --name $KVM_VM_NAME
