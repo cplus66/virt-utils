@@ -17,9 +17,9 @@
 #   8    |  16384 = 64 / 24 * 8 | 512G = 2T / 24 * 8
 #
 
-if [ $# -ne 2 ]; then
+if [ $# -lt 2 ]; then
   echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} UEFI={0|1} DISK_BUS={usb,ide,scsi}"
-  echo "$0 KVM_NAME IMAGE_NAME"
+  echo "$0 <KVM_NAME> <IMAGE_NAME> [IMAGE_NAME]"
   exit 1
 fi
 
@@ -49,15 +49,23 @@ else
   NET_CONF="$NET_CONF  --network bridge=$NET2,model=virtio"
 fi
 
+DISK_1=$2
+DISK_CONF="--disk=${DISK_1},device=disk,bus=$DISK_BUS,format=qcow2 "
+
+if [ $# -eq 3 ]; then
+  DISK_2=$3
+  DISK_CONF="$DISK_CONF --disk=${DISK_2},device=disk,bus=$DISK_BUS,format=qcow2"
+fi
+
 virt-install \
   --arch x86_64 \
   --vcpus $CPU \
   --ram $RAM \
   --os-variant $OS \
-  --disk=$2,device=disk,bus=$DISK_BUS,format=qcow2 \
-  $UEFI \
   --import \
   --vnc \
   --noautoconsole \
-  $NET_CONF \
-  --name $KVM_VM_NAME
+  --name $KVM_VM_NAME \
+  $DISK_CONF \
+  $UEFI \
+  $NET_CONF
