@@ -12,8 +12,8 @@
 # - Run resize2fs /dev/vda1
 
 if [ $# -ne 2 ]; then
-  echo "OS=ubuntu-18 $0 image size"
-  echo "$0 ubunto.qcow2 128G"
+  echo "Usage: OS=ubuntu-18 $0 <image> <size>"
+  echo "Example: $0 ubunto.qcow2 128G"
   exit 1
 fi
 
