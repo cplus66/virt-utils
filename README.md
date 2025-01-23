@@ -1,4 +1,11 @@
 # virt-utils
+
+## Installation
+```
+sudo apt install virtinst
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager -y
+```
+
 ## Libvirt
 Scripts to launch VM by using virsh
 
