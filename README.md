@@ -6,10 +6,14 @@
 ```
 sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst libguestfs-tools libosinfo-bin
 ```
--Add user into libvirt and kvm group.
+- Add user into libvirt and kvm group.
+```
+sudo usermod -aG kvm,libvirt $USER
+newgrp libvirt
+```
 
 ### netplan
-Edit /etc/netplan# cat 50-cloud-init.yaml
+- Edit /etc/netplan# cat 50-cloud-init.yaml
 ```
 network:
     ethernets:
@@ -43,7 +47,7 @@ network:
 
 - enable the network
 ```
-virsh net-define /path/to/my/kvm-hostbridge.xml
+virsh net-define kvm-hostbridge.xml
 virsh net-start hostbridge
 virsh net-autostart hostbridge
 ```
