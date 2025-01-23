@@ -18,7 +18,8 @@
 #
 
 if [ $# -lt 2 ]; then
-  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|br0|br1} NET2={br0|br1} UEFI={0|1} DISK_BUS={usb,ide,scsi}"
+  echo "Usage: CPU={1|2|4|8} RAM={2048|4096|9128|16384} NET={default|bridge-ubu24|br0|br1} NET2={br0|br1}"
+  echo "UEFI={0|1} DISK_BUS={usb,ide,scsi}"
   echo "$0 <KVM_NAME> <IMAGE_NAME> [IMAGE_NAME]"
   exit 1
 fi
@@ -40,6 +41,9 @@ NET_CONF=
 
 if [ "x$NET" == "xdefault" ]; then
   NET_CONF="--network default,model=virtio"
+ 
+elif [ "x$NET" == "xbridge-ubu24" ]; then
+  NET_CONF="--network network=hostbridge"
 
 elif [ "x$NET2" == "x" ]; then
   NET_CONF="--network bridge=$NET,model=virtio"

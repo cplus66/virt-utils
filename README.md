@@ -1,25 +1,62 @@
 # virt-utils
 
 ## Installation (Ubuntu 24.04)
+
+- Install packaage
 ```
-sudo apt install virtinst
-sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager -y
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst libguestfs-tools libosinfo-bin
+```
+-Add user into libvirt and kvm group.
+
+### netplan
+Edit /etc/netplan# cat 50-cloud-init.yaml
+```
+network:
+    ethernets:
+        eno1:
+          dhcp4: no
+    bridges:
+        br0:
+            interfaces: [eno1]
+            addresses:
+            - 172.17.4.253/23
+            nameservers:
+                addresses:
+                - 8.8.8.8
+                search: []
+            routes:
+            -   to: default
+                via: 172.17.5.254
+    version: 2
 ```
 
-### Setting up qemu-bridge-helper
-Create the file /etc/qemu/bridge.conf with the content:
+### net-start
+
+- create  kvm-hostbridge.xml
 ```
-allow virbr0
+<network>
+  <name>hostbridge</name>
+  <forward mode="bridge"/>
+  <bridge name="br0"/>
+</network>
 ```
 
-Restrict the permissions of this file to make sure it can’t be edited by regular users.
+- enable the network
 ```
-# chown root:root /etc/qemu/bridge.conf
-# chmod 0640 /etc/qemu/bridge.conf
+virsh net-define /path/to/my/kvm-hostbridge.xml
+virsh net-start hostbridge
+virsh net-autostart hostbridge
 ```
-Add setuid to the qemu-bridge-helper binary.
+
+- enable ipforward
 ```
-# chmod u+s /usr/lib/qemu/qemu-bridge-helper
+sudo iptables -A FORWARD -p all -i br0 -j ACCEPT
+```
+
+### Reference
+```
+https://www.cherryservers.com/blog/install-kvm-ubuntu
+https://www.dzombak.com/blog/2024/02/Setting-up-KVM-virtual-machines-using-a-bridged-network.html
 ```
 
 ## Libvirt
