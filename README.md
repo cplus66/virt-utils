@@ -1,9 +1,25 @@
 # virt-utils
 
-## Installation
+## Installation (Ubuntu 24.04)
 ```
 sudo apt install virtinst
 sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager -y
+```
+
+### Setting up qemu-bridge-helper
+Create the file /etc/qemu/bridge.conf with the content:
+```
+allow virbr0
+```
+
+Restrict the permissions of this file to make sure it can’t be edited by regular users.
+```
+# chown root:root /etc/qemu/bridge.conf
+# chmod 0640 /etc/qemu/bridge.conf
+```
+Add setuid to the qemu-bridge-helper binary.
+```
+# chmod u+s /usr/lib/qemu/qemu-bridge-helper
 ```
 
 ## Libvirt
