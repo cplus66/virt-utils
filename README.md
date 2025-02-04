@@ -4,8 +4,9 @@
 
 - Install packaage
 ```
-sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst libguestfs-tools libosinfo-bin
+sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst libguestfs-tools libosinfo-bin
 ```
+
 - Add user into libvirt and kvm group.
 ```
 sudo usermod -aG kvm,libvirt $USER
